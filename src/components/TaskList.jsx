@@ -18,6 +18,10 @@ const TaskList = ({ tasks }) => {
   return <ul className="tasks__list no-bullet">{getTaskListJSX(tasks)}</ul>;
 };
 
+
+
+
+
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
@@ -29,3 +33,23 @@ TaskList.propTypes = {
 };
 
 export default TaskList;
+
+
+// How would the code change without this helper function?
+
+// const TaskList = ({ tasks }) => {
+//   return (
+//     <ul className="tasks__list no-bullet">
+//       {tasks.map((task) => { // The mapping logic moves directly here
+//         return (
+//           <Task
+//             key={task.id}
+//             id={task.id}
+//             title={task.title}
+//             isComplete={task.isComplete}
+//           />
+//         );
+//       })}
+//     </ul>
+//   );
+// };

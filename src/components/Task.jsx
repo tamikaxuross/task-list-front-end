@@ -29,26 +29,30 @@ Task.propTypes = {
 export default Task;
 
 
-const Task = (props) => {
-  const [complete, setComplete] = useState(isComplete);
-  const buttonClass = complete ? 'tasks__item__toggle--completed' : '';
+///How would the code change if `{id, title, isComplete}` were replaced with `props`?
 
-  return (
-    <li className="tasks__item">
-      <button
-        className={`tasks__item__toggle ${buttonClass}`}
-        onClick={() => setComplete(!complete)}
-      >
-        {props.title} 
-      </button>
-      <button className="tasks__item__remove button">x</button>
-    </li>
-  );
-};
+// const Task = (props) => {
+//   const [complete, setComplete] = useState(isComplete);
+//   const buttonClass = complete ? 'tasks__item__toggle--completed' : '';
 
-Task.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  isComplete: PropTypes.bool.isRequired
-};
-export default Task;
+//   return (
+//     <li className="tasks__item">
+//       <button
+//         className={`tasks__item__toggle ${buttonClass}`}
+//         onClick={() => setComplete(!complete)}
+//       >
+//         {props.title} 
+//       </button>
+//       <button className="tasks__item__remove button">x</button>
+//     </li>
+//   );
+// };
+
+// Task.propTypes = {
+//   id: PropTypes.number.isRequired,
+//   title: PropTypes.string.isRequired,
+//   isComplete: PropTypes.bool.isRequired
+// };
+
+// export default Task;
+
