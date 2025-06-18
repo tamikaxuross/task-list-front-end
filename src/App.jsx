@@ -17,7 +17,7 @@ import './App.css';
 // ];
 
 const App = () => {
-  const [tasks, SetTasks] = useState([
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       title: 'Mow the lawn',
@@ -28,7 +28,27 @@ const App = () => {
       title: 'Cook Pasta',
       isComplete: true,
     },
-]);
+  ]);
+
+  const toggleTaskComplete = (taskId) => {
+    setTasks(tasks => {
+      return tasks.map(task => {
+        if (task.id == taskId) {
+          return { ...task, isComplete: !task.isComplete };
+        } else {
+          return task;
+        }
+      });
+    });
+  };
+
+  const deleteTask = (taskId) => {
+    setTasks(tasks => {
+      return tasks.filter(task => {
+        return task.id !== taskId;
+      });
+    });
+  };
 
   return (
     <div className="App">
@@ -36,7 +56,7 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>{<TaskList tasks={tasks} />}</div>
+        <div>{<TaskList onToggleTaskComplete={toggleTaskComplete} onDeleteTask={deleteTask} tasks={tasks} />}</div>
       </main>
     </div>
   );
