@@ -31,16 +31,6 @@ Task.propTypes = {
 export default Task;
 
 
-function App() {
-  return (
-    <main>
-      <h1>Attendance</h1>
-      <ClassInfo></ClassInfo>
-      <StudentList></StudentList>
-    </main>
-  );
-}
-
 
 ///How would the code change if `{id, title, isComplete}` were replaced with `props`?
 
