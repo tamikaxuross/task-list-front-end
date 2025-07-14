@@ -2,20 +2,8 @@ import TaskList from './components/TaskList.jsx';
 import './App.css';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
+import NewTaskForm from './components/NewTaskForm.jsx';
 
-// Wave 3: Udate App to store the list of task data in state.
-// const TASKS = [
-//   {
-//     id: 1,
-//     title: 'Mow the lawn',
-//     isComplete: false,
-//   },
-//   {
-//     id: 2,
-//     title: 'Cook Pasta',
-//     isComplete: true,
-//   },
-// ];
 
 const kBaseUrl = 'http://localhost:5000';
 
@@ -81,8 +69,8 @@ const deleteTaskApi = (id) => {
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const [newTaskTitle, setNewTaskTitle] = useState('');
-  const [newTaskDescription, setNewTaskDescription] = useState('');
+  // const [newTaskTitle, setNewTaskTitle] = useState('');
+  // const [newTaskDescription, setNewTaskDescription] = useState('');
 
   const getAllTasks = () => {
     return getallTasksApi()
@@ -93,18 +81,9 @@ const App = () => {
     getAllTasks();
   }, []);
 
-// Wave 3 toggleTaskComplete with hardcoded data:
-  // const toggleTaskComplete = (id) => {
-  //   setTasks(tasks => {
-  //     return tasks.map(task => {
-  //       if (task.id == id) {
-  //         return { ...task, isComplete: !task.isComplete };
-  //       } else {
-  //         return task;
-  //       }
-  //     });
-  //   });
-  // };
+  
+
+
 
   const toggleTaskComplete = (id) => {
     return completeTaskApi(id)
@@ -132,32 +111,23 @@ const App = () => {
     });
   };
 
+// Wave 5 remove
+    // const addTask = () => {
+    //   if (!newTaskTitle.trim()) {
+    //     alert("Task title can't be empty.");
+    //     return;
+    //   }
 
-  // Wave 3 Delete Task with hardcoded data:
-  // const deleteTask = (id) => {
-  //   setTasks(tasks => {
-  //     return tasks.filter(task => {
-  //       return task.id !== id;
-  //     });
-  //   });
-  // };
-
-    const addTask = () => {
-      if (!newTaskTitle.trim()) {
-        alert("Task title can't be empty.");
-        return;
-      }
-
-      return addTaskApi(newTaskTitle, newTaskDescription)
-        .then(newTaskResult => {
-          setTasks(tasks => [...tasks, newTaskResult]);
-          setNewTaskTitle('');
-          setNewTaskDescription('');
-        })
-        .catch(error => {
-          console.log(error);
-        })
-    }
+    //   return addTaskApi(newTaskTitle, newTaskDescription)
+    //     .then(newTaskResult => {
+    //       setTasks(tasks => [...tasks, newTaskResult]);
+    //       setNewTaskTitle('');
+    //       setNewTaskDescription('');
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     })
+    // }
 
     const deleteTask = id => {
       return deleteTaskApi(id)
@@ -168,6 +138,16 @@ const App = () => {
         }); 
   };
 
+    // Wave 5
+    const onPostTask = (title, description) => {
+      return addTaskApi(title, description) 
+      .then((newTask) => {
+          setTasks((prevTasks) => [...prevTasks, newTask]);
+      })
+      .catch((error) => console.error(error));
+    };
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -175,7 +155,8 @@ const App = () => {
       </header>
       <main>
         <div className="add-task-form">
-          <input 
+          <NewTaskForm onPostTask={onPostTask}/>
+          {/* <input 
             type="text"
             placeholder="New task title"
             value={newTaskTitle}
@@ -188,7 +169,8 @@ const App = () => {
             onChange={(e) => setNewTaskDescription(e.target.value)}
             rows="2"
             ></textarea>
-            <button onClick={addTask}>Add Task</button>           
+            <button onClick={addTask}>Add Task</button>     
+             */}
         </div>
 
         <div>{<TaskList onToggleTaskIncomplete={toggleTaskInComplete} onToggleTaskComplete={toggleTaskComplete} onDeleteTask={deleteTask} tasks={tasks} />}</div>

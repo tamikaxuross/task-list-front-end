@@ -28,7 +28,7 @@ const NewTaskForm = ( { onPostTask } ) => {
     );
 };
 
-NewTaskForm.PropTypes = {
+NewTaskForm.propTypes = {
     onPostTask: PropTypes.func.isRequired,
 };
 
